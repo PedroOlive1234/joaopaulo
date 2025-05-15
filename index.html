@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nosso Amor Eterno</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom right, #fbe9ff, #f3e0ff);
+            font-family: 'Dancing Script', cursive;
+            color: #6a1b9a;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .coraçoes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .coraçoes span {
+            position: absolute;
+            color: rgba(255, 0, 0, 0.6);
+            font-size: 20px;
+            animation: cair 8s linear infinite;
+        }
+
+        @keyframes cair {
+            0% {
+                transform: translateY(-10vh) translateX(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) translateX(20px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 30px;
+            border-radius: 30px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            max-width: 500px;
+            z-index: 1;
+            backdrop-filter: blur(10px);
+        }
+
+        img {
+            width: 100%;
+            border-radius: 25px;
+            border: 5px solid #e1bee7;
+            box-shadow: 0 0 20px rgba(170, 0, 255, 0.3);
+        }
+
+        .data {
+            margin-top: 15px;
+            font-size: 20px;
+            color: #4a148c;
+        }
+
+        .cronometro {
+            margin-top: 15px;
+            font-size: 26px;
+            color: #6a1b9a;
+        }
+
+        .mensagem {
+            margin-top: 25px;
+            font-size: 24px;
+            color: #ad1457;
+            font-style: italic;
+            animation: pulse 3s infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                margin: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="coraçoes" id="coraçoes"></div>
+
+    <div class="container">
+        <img src="joao paulo.jpg" alt="Foto do casal">
+
+        <div class="data">
+            Início: 02/05 às 23:47
+        </div>
+
+        <div class="cronometro" id="cronometro">
+            Carregando...
+        </div>
+
+        <div class="mensagem">
+           Eu ando só pensando em você<br>
+            Eu ando só pensando na gente 💕
+        </div>
+    </div>
+
+    <script>
+        function atualizarCronometro() {
+            const inicio = new Date('2025-05-02T23:47:00');
+            const agora = new Date();
+            const diff = agora - inicio;
+
+            const dias = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const horas = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const minutos = Math.floor((diff / (1000 * 60)) % 60);
+            const segundos = Math.floor((diff / 1000) % 60);
+
+            document.getElementById('cronometro').innerHTML =
+                `${dias} dias, ${horas} horas, ${minutos} minutos, ${segundos} segundos`;
+        }
+
+        setInterval(atualizarCronometro, 1000);
+        atualizarCronometro();
+
+        // Criar corações caindo
+        const coracoesContainer = document.getElementById('coraçoes');
+        for (let i = 0; i < 30; i++) {
+            const coracao = document.createElement('span');
+            coracao.innerHTML = '❤';
+            coracao.style.left = Math.random() * 100 + 'vw';
+            coracao.style.animationDuration = (5 + Math.random() * 5) + 's';
+            coracao.style.fontSize = (20 + Math.random() * 20) + 'px';
+            coracoesContainer.appendChild(coracao);
+        }
+    </script>
+
+</body>
+</html>
